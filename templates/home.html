@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommender</title>
+    
+    <style>
+        :root{
+            --bgdark:black;
+            --bglight:white;
+            --textdark:black;
+            --textlight:white;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+     
+        .dataselect{
+            padding: 20px 10px 50px 10px;
+
+            text-align: center;
+
+        }
+        .dataselect h1{
+    margin-bottom: 30px;
+        }
+        .dataselect form label{
+            font-size:1.8rem;
+            text-transform: capitalize;
+        }
+        .dataselect select{
+          width: 600px;
+          height: 45px;
+          padding: 0 5px;
+          font-size: 1.3rem;
+        }
+        .dataselect button{
+            padding: 10px;
+            font-size: 1.2rem;
+        }
+        .container h1{
+            text-align: center;
+        }
+        .result{
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px ;
+
+            flex-wrap: wrap;
+            align-content: center;
+            gap: 30px;
+
+        }
+        .moviescard{
+            width: 350px;
+            height: 400px;
+            border: 2px solid white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        .moviescard img{
+            height: 300px;
+            object-fit: cover;
+            object-position: center;
+
+        }
+        .moviescard h2{
+            
+            padding: 5px;
+        }
+        .darklightmode{
+            border: 2px solid rgb(9, 9, 9);
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            right: 30px;
+            top: 10px;
+            cursor: pointer;
+        }
+        .dark{
+            background: #000;
+
+        }
+        .light{
+            background: white;
+        }
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="darklightmode hidden">
+ 
+        <img class="light" src="../image/icons8-sun-128.png" alt="">
+    </div>
+    <div class="darklightmode ">
+        <img class="dark" src="../image/icons8-moon-100.png" alt="">
+    
+    </div>
+ 
+<div class="dataselect">
+    <h1>Movie Recommender System</h1>
+    <form method="POST" action="/">
+        <label for="movie">Select a movie:</label>
+        <select name="movie" id="movie">
+            {% for movie in movie_list %}
+                <option value="{{ movie }}">{{ movie }}</option>
+            {% endfor %}
+        </select>
+        <button>Show Recommendation</button>
+    </form>
+</div>
+    
+
+<div class="container">
+    <h1>Recommended Movies</h1>
+    <div class="result">
+          
+        {% for movie_name, poster in zip(movie_names, posters) %}
+        <div class="moviescard">
+            <img src="{{ poster }}" alt="{{ movie_name }}">
+            <h2>{{ movie_name }}</h2>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+  <script>
+    const dark = document.querySelector(".dark")
+    const light = document.querySelector(".light")
+    const darkmode = document.querySelectorAll(".darklightmode")
+
+
+
+    light.addEventListener("click",()=>{
+        
+    darkmode.forEach((mode)=>{
+        mode.classList.remove("hidden")
+        mode.addEventListener("click",()=>{
+            mode.classList.add("hidden") 
+        })
+    })
+        document.body.style.background = "white"
+        document.body.style.color = "black"
+    })
+    dark.addEventListener("click",()=>{
+        
+    darkmode.forEach((mode)=>{
+        mode.classList.remove("hidden")
+        mode.addEventListener("click",()=>{
+            mode.classList.add("hidden") 
+        })
+    })
+        document.body.style.background = "black"
+        document.body.style.color = "white"
+
+
+    })
+  </script>
+</body>
+</html>

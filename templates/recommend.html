@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendations</title>
+</head>
+<body>
+    <h1>Recommended Movies</h1>
+    {% for movie_name, poster in zip(movie_names, posters) %}
+        <div>
+            <h2>{{ movie_name }}</h2>
+            <img src="{{ poster }}" alt="{{ movie_name }}">
+        </div>
+    {% endfor %}
+    <a href="/">Back</a>
+</body>
+</html>
